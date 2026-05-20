@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  iptv:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - M3U_URL=${M3U_URL}
+      - M3U_CONTENT=${M3U_CONTENT}
+      - MAX_WORKERS=${MAX_WORKERS:-100}
+      - ENABLE_AUTH=${ENABLE_AUTH:-false}
+      - API_KEY=${API_KEY:-}
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+    volumes:
+      - ./logs:/var/log
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/app/scripts/healthcheck.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
