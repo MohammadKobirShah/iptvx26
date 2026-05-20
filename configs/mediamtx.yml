@@ -1,0 +1,73 @@
+###############################################################################
+# MediaMTX Configuration for Railway
+###############################################################################
+
+logLevel: info
+logDestinations: [stdout]
+
+api: yes
+apiAddress: 127.0.0.1:9997
+
+metrics: no
+
+readTimeout: 20s
+writeTimeout: 20s
+readBufferCount: 512
+
+###############################################################################
+# RTSP
+###############################################################################
+rtsp: yes
+protocols: [tcp]
+encryption: no
+rtspAddress: :8554
+rtspsAddress: :8555
+rtpAddress: :8000
+rtcpAddress: :8001
+
+###############################################################################
+# RTMP
+###############################################################################
+rtmp: yes
+rtmpAddress: :1935
+
+###############################################################################
+# HLS (Low Latency)
+###############################################################################
+hls: yes
+hlsAddress: :8188
+hlsEncryption: no
+hlsAlwaysRemux: no
+hlsVariant: mpegts
+hlsSegmentCount: 7
+hlsSegmentDuration: 1s
+hlsPartDuration: 200ms
+hlsSegmentMaxSize: 50M
+hlsAllowOrigin: '*'
+
+###############################################################################
+# WebRTC (Ultra-Low Latency)
+###############################################################################
+webrtc: yes
+webrtcAddress: :8889
+webrtcEncryption: no
+webrtcAllowOrigin: '*'
+webrtcICEServers2:
+  - urls: [stun:stun.l.google.com:19302]
+
+###############################################################################
+# SRT
+###############################################################################
+srt: yes
+srtAddress: :8890
+
+###############################################################################
+# Path Defaults
+###############################################################################
+pathDefaults:
+  source: publisher
+  sourceOnDemand: no
+  maxReaders: 0
+  overridePublisher: yes
+  
+paths: {}
